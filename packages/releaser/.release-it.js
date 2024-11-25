@@ -14,10 +14,10 @@ const options = parseArgs(process.argv, {
   alias: { r: "repo", f: "force-build" }
 });
 
-if (!options.repo) {
-  console.error('"-r --repo" not specified');
-  process.exit(1);
-}
+// if (!options.repo) {
+//   console.error('"-r --repo" not specified');
+//   process.exit(1);
+// }
 
 const isPromotion = !options.preRelease;
 
