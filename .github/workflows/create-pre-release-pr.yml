@@ -1,12 +1,13 @@
-name: Update Changelogs and Versions On PR Ready To Merge
+name: Create Pre-Release PR
 
 on:
-  pull_request:
-    labeled:
+  push:
+    branches:
+      - main
 
 jobs:
-  update_changelogs_and_versions:
-    name: Update Changelogs and Versions
+  create_pr:
+    name: Create Pre-Release PR with Updated Changelogs and Versions
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -39,13 +40,6 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Generate releases and build docker images
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -54,3 +48,15 @@ jobs:
           git config --global user.name "CI"
           npm run release -w apps/api -- --preRelease=beta --verbose --ci -r ${{ vars.API_REGISTRY }}
           npm run release -w apps/deploy-web -- --preRelease=beta -f --verbose --ci -r ${{ vars.WEB_REGISTRY }}
+
+      - name: Commit and Create PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: '${{ github.token }}'
+          branch: release/release-test
+          base: main
+          title: "Release test"
+          body: |
+            ## Changes
+            - Updated changelog
+            - Bumped version to $(cat package.json | jq -r .version)
