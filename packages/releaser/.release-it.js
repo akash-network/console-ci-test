@@ -53,6 +53,14 @@ module.exports = {
       }
     }
   },
+  git: {
+    push: false,
+    tag: false,
+    commit: false,
+    commitsPath: ".",
+    requireCommits: !isPromotion,
+    requireCommitsFail: false
+  },
   npm: {
     publish: false,
     versionArgs: ["--workspaces false"]
