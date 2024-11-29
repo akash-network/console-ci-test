@@ -56,3 +56,4 @@ jobs:
           branch: release/bumps
           base: main
           title: "Release bumps"
+          body: "This is an automated PR to update the changelogs and versions for the next release. Merging it will trigger builds and deploy workflows"
