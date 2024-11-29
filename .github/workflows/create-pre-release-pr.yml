@@ -38,7 +38,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm ci -w packages/releaser
 
       - name: Generate releases and build docker images
         env:
@@ -53,10 +53,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: '${{ github.token }}'
-          branch: release/release-test
+          branch: release/bumps
           base: main
-          title: "Release test"
-          body: |
-            ## Changes
-            - Updated changelog
-            - Bumped version to $(cat package.json | jq -r .version)
+          title: "Release bumps"
+          commit-message: 'chore(release): bump versions and update changelogs'

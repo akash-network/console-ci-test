@@ -2,22 +2,12 @@ const parseArgs = require("yargs-parser");
 const { addBangNotes } = require("conventional-changelog-conventionalcommits/utils");
 const { DEFAULT_COMMIT_TYPES } = require("conventional-changelog-conventionalcommits");
 
-const version = "${version}";
 const packageName = process.env.npm_package_name;
 const scope = packageName.split("/")[1];
-const pathParts = process.env.npm_package_json.split("/");
-const app = pathParts[pathParts.length - 2];
 
 const options = parseArgs(process.argv, {
-  string: ["repo", "preRelease"],
-  boolean: ["force-build"],
-  alias: { r: "repo", f: "force-build" }
+  string: ["preRelease"],
 });
-
-// if (!options.repo) {
-//   console.error('"-r --repo" not specified');
-//   process.exit(1);
-// }
 
 const isPromotion = !options.preRelease;
 
@@ -62,17 +52,5 @@ module.exports = {
         };
       }
     }
-  },
-  git: {
-    push: false,
-    tag: false,
-    commitsPath: ".",
-    commitMessage: `chore(release): released version ${scope}/v${version}`,
-    requireCommits: !isPromotion,
-    requireCommitsFail: false
-  },
-  npm: {
-    publish: false,
-    versionArgs: ["--workspaces false"]
   }
 };
