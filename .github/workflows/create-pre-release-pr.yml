@@ -52,8 +52,6 @@ jobs:
       - name: Cleanup Previous Release Branch
         run: |
           git branch -D release/bumps || true
-          git checkout -b release/bumps
-          git push origin release/bumps --force
 
       - name: Commit and Create PR
         uses: peter-evans/create-pull-request@v7
