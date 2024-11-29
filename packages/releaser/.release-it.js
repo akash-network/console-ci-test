@@ -52,5 +52,9 @@ module.exports = {
         };
       }
     }
+  },
+  npm: {
+    publish: false,
+    versionArgs: ["--workspaces false"]
   }
 };
