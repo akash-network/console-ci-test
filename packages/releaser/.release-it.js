@@ -2,12 +2,14 @@ const parseArgs = require("yargs-parser");
 const { addBangNotes } = require("conventional-changelog-conventionalcommits/utils");
 const { DEFAULT_COMMIT_TYPES } = require("conventional-changelog-conventionalcommits");
 
+const version = "${version}";
 const packageName = process.env.npm_package_name;
 const scope = packageName.split("/")[1];
 
 const options = parseArgs(process.argv, {
   string: ["preRelease"],
 });
+
 
 const isPromotion = !options.preRelease;
 
@@ -46,9 +48,9 @@ module.exports = {
         return {
           level,
           reason:
-            breakings === 1
-              ? `There is ${breakings} BREAKING CHANGE and ${features} features`
-              : `There are ${breakings} BREAKING CHANGES and ${features} features`
+              breakings === 1
+                  ? `There is ${breakings} BREAKING CHANGE and ${features} features`
+                  : `There are ${breakings} BREAKING CHANGES and ${features} features`
         };
       }
     }
@@ -56,8 +58,8 @@ module.exports = {
   git: {
     push: false,
     tag: false,
-    commit: false,
     commitsPath: ".",
+    commitMessage: `chore(release): released version ${scope}/v${version}`,
     requireCommits: !isPromotion,
     requireCommitsFail: false
   },
@@ -66,3 +68,4 @@ module.exports = {
     versionArgs: ["--workspaces false"]
   }
 };
+
