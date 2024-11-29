@@ -1,5 +1,14 @@
 
 
+## [2.34.0-beta.1](https://github.com/akash-network/console/compare/console-web/v2.25.0-beta.0...2.34.0-beta.1) (2024-11-29)
+
+
+### Bug Fixes
+
+* dummy ([8940233](https://github.com/akash-network/console/commit/8940233772b978c8acc86a3c308c3609f50790f3))
+* dummy ([bd717ce](https://github.com/akash-network/console/commit/bd717ce1b92c46053b3398326a2c588cb8afe5ce))
+* dummy ([7b7dd44](https://github.com/akash-network/console/commit/7b7dd44143866547d34cd97cf00e3452a876168b))
+
 ## [2.34.0-beta.0](https://github.com/akash-network/console/compare/console-api/v2.33.1...console-api/v2.34.0-beta.0) (2024-11-23)
 
 
