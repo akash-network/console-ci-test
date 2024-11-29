@@ -56,4 +56,3 @@ jobs:
           branch: release/bumps
           base: main
           title: "Release bumps"
-          commit-message: 'chore(release): bump versions and update changelogs'
