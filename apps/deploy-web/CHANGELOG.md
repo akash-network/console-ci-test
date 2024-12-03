@@ -1,5 +1,7 @@
 
 
+## [2.27.0](https://github.com/akash-network/console-ci-test/compare/console-web/v2.25.1-beta.1...2.27.0) (2024-12-03)
+
 ## [2.26.0](https://github.com/akash-network/console-ci-test/compare/console-web/v2.25.1-beta.1...2.26.0) (2024-12-03)
 
 ## [2.25.1-beta.1](https://github.com/akash-network/console/compare/console-web/v2.25.1-beta.0...console-web/v2.25.1-beta.1) (2024-12-03)
