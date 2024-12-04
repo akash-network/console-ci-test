@@ -112,3 +112,4 @@ Here is a list of endpoints that have changed in this release. Old endpoints wil
 | `/providers/<provider>/deployments/<skip>/<take>/<status>` | `/providers/<provider>/deployments/<skip>/<take>?status=<status>` |
 
 fix
+chore
