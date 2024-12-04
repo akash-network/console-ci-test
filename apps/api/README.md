@@ -113,3 +113,4 @@ Here is a list of endpoints that have changed in this release. Old endpoints wil
 
 fix 1
 chore 1
+fix 2
