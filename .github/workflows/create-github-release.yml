@@ -1,4 +1,4 @@
-name: Release App
+name: Create GitHub Release
 
 on:
   workflow_call:
@@ -16,7 +16,8 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  release:
+    name: Create GitHub Release
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +26,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get Diffs
+      - name: Get Version and Changelog Updates
         id: bumps
         run: |
           package_file="apps/${{ inputs.app }}/package.json"
@@ -36,20 +37,31 @@ jobs:
           fi
           
           current_version=$(jq -r '.version' "$package_file")
+          git_tag=$current_version
           
           if [ "${{ inputs.app }}" = "deploy-web" ]; then
-            current_version="console-web/v$current_version"
+            git_tag="console-web/v$git_tag"
           elif [ "${{ inputs.app }}" = "api" ]; then
-            current_version="console-api/v$current_version"
+            git_tag="console-api/v$git_tag"
           else
             echo "Error: Unsupported app type '${{ inputs.app }}'."
             exit 1
           fi
           
-          has_tag=$(git rev-parse "$current_version" >/dev/null 2>&1 && echo "true" || echo "false")
+          has_tag=$(git rev-parse "$git_tag" >/dev/null 2>&1 && echo "true" || echo "false")
           
           if [ "$has_tag" = "false" ]; then
-            echo "version=$current_version" >> $GITHUB_OUTPUT
+            echo "version=$git_tag" >> $GITHUB_OUTPUT
+            echo "version=$git_tag"
+          
+            changelog=$(script/extract-changelog.sh "$current_version" "apps/${{ inputs.app }}/CHANGELOG.md")
+
+            if [ -n "$changelog" ]; then
+              echo "changelog=$changelog"
+              echo "changelog<<EOF" >> $GITHUB_OUTPUT
+              echo "$changelog" >> $GITHUB_OUTPUT
+              echo "EOF" >> $GITHUB_OUTPUT
+            fi
           fi
 
       - name: Create Release

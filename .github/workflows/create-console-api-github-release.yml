@@ -1,11 +1,11 @@
-name: Draft Api Release
+name: Create Console Api GitHub Release
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'apps/deploy-web/package.json'
+      - 'apps/api/package.json'
 
 permissions:
   contents: write
@@ -13,7 +13,7 @@ permissions:
 jobs:
   release:
     name: Create Release Draft
-    uses: ./.github/workflows/release-app.yml
+    uses: ./.github/workflows/create-github-release.yml
     secrets: inherit
     with:
-      app: deploy-web
+      app: api
