@@ -1,0 +1,19 @@
+name: Draft Api Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/deploy-web/package.json'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create Release Draft
+    uses: ./.github/workflows/release-app.yml
+    secrets: inherit
+    with:
+      app: deploy-web

@@ -36,17 +36,21 @@ jobs:
           fi
           
           current_version=$(jq -r '.version' "$package_file")
-          current_version="console-${{inputs.app}}/v$current_version"
           
-          if ! git rev-parse "$current_version" >/dev/null 2>&1; then
+          if [ "${{ inputs.app }}" = "deploy-web" ]; then
+            current_version="console-web/v$current_version"
+          elif [ "${{ inputs.app }}" = "api" ]; then
+            current_version="console-api/v$current_version"
+          else
+            echo "Error: Unsupported app type '${{ inputs.app }}'."
+            exit 1
+          fi
+          
+          has_tag=$(git rev-parse "$current_version" >/dev/null 2>&1 && echo "true" || echo "false")
+          
+          if [ "$has_tag" = "false" ]; then
             echo "version=$current_version" >> $GITHUB_OUTPUT
           fi
-
-      - name: Echo the version and changelog
-        run: |
-          echo "---- version start ----"
-          echo "${{ steps.bumps.outputs.version }}"
-          echo "---- version end ----"
 
       - name: Create Release
         if: ${{ steps.bumps.outputs.version != '' }}
