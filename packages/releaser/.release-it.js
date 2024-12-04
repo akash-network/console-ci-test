@@ -50,6 +50,7 @@ module.exports = {
   git: {
     push: false,
     tag: false,
+    tagName: `${scope}/v${version}`,
     commitsPath: ".",
     commitMessage: `chore(release): released version ${scope}/v${version}`,
     requireCommitsFail: false
