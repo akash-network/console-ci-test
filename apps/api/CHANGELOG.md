@@ -1,6 +1,6 @@
 
 
-## [2.37.1](https://github.com/akash-network/console/compare/console-api/v2.37.0...console-api/v2.37.1) (2024-12-04)
+## [2.37.2](https://github.com/akash-network/console/compare/console-api/v2.37.0...console-api/v2.37.1) (2024-12-04)
 
 
 ### Bug Fixes
