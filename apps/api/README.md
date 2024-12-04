@@ -111,5 +111,5 @@ Here is a list of endpoints that have changed in this release. Old endpoints wil
 | `/predicted-date-height/<timestamp>/<blockWindow>`         | `/predicted-date-height/<timestamp>?blockWindow=<blockWindow>`    |
 | `/providers/<provider>/deployments/<skip>/<take>/<status>` | `/providers/<provider>/deployments/<skip>/<take>?status=<status>` |
 
-fix
+fix 1
 chore 1
