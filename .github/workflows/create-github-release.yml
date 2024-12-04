@@ -73,4 +73,4 @@ jobs:
         with:
           tag_name: ${{ steps.bumps.outputs.version }}
           release_name: ${{ steps.bumps.outputs.version }}
-          prerelease: true
+          body: ${{ steps.bumps.outputs.changelog }}
