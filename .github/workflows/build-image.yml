@@ -12,6 +12,9 @@ on:
 concurrency:
   group: ${{ github.workflow }}
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build Docker image
@@ -46,6 +49,6 @@ jobs:
           fi
           
           tag="${tag#*/}"
-          tag="${tag#v}"
+          tag="${tag#v}"g
 
           ./packages/docker/script/build.sh -r $registry -t $tag -a $app $force_build
