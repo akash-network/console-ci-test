@@ -30,7 +30,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          tag=${{ github.event.inputs.tag }}
+          tag=${{ inputs.tag }}
           force_build=""
           
           if [[ "$tag" == console-api/* ]]; then
