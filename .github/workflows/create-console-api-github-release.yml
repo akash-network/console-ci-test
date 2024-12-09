@@ -1,0 +1,19 @@
+name: Create Console API GitHub Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/api/package.json'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create Release Draft
+    uses: ./.github/workflows/create-github-release.yml
+    secrets: inherit
+    with:
+      app: api

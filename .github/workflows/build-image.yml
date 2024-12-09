@@ -1,0 +1,51 @@
+name: Build Image
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      tag:
+        description: 'Tag to build'
+        required: true
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}
+
+jobs:
+  build:
+    name: Build Docker image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: |
+          tag=${{ github.event.inputs.tag }}
+          force_build=""
+          
+          if [[ "$tag" == console-api/* ]]; then
+            registry=${{ vars.API_REGISTRY }}
+            app="api"
+          elif [[ "$tag" == console-web/* ]]; then
+            registry=${{ vars.WEB_REGISTRY }}
+            app="deploy-web"
+            force_build="-f"
+          else
+            echo "Error: Unknown tag format"
+            exit 1
+          fi
+          
+          tag="${tag#*/}"
+          tag="${tag#v}"
+
+          ./packages/docker/script/build.sh -r $registry -t $tag -a $app $force_build
