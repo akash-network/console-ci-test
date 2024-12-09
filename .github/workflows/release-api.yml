@@ -18,10 +18,10 @@ jobs:
     with:
       app: api
 
-    build:
-      needs: release
-      name: Build Docker image
-      uses: ./.github/workflows/build-image.yml
-      secrets: inherit
-      with:
-        tag: ${{ needs.release.outputs.version }}
+  build:
+    needs: release
+    name: Build Docker image
+    uses: ./.github/workflows/build-image.yml
+    secrets: inherit
+    with:
+      tag: ${{ needs.release.outputs.version }}
