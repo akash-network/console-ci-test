@@ -15,7 +15,7 @@ jobs:
     with:
       app: deploy-web
 
-  build:
+  build-beta:
     needs: release
     name: Build Docker image
     uses: ./.github/workflows/build-image.yml
@@ -23,5 +23,20 @@ jobs:
     permissions:
       contents: write
       packages: write
+    env:
+      DEPLOYMENT_ENV: staging
+    with:
+      tag: ${{ needs.release.outputs.version }}-beta
+
+  build-prod:
+    needs: release
+    name: Build Docker image
+    uses: ./.github/workflows/build-image.yml
+    secrets: inherit
+    permissions:
+      contents: write
+      packages: write
+    env:
+      DEPLOYMENT_ENV: production
     with:
       tag: ${{ needs.release.outputs.version }}
