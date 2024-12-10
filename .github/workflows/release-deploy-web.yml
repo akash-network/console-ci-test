@@ -17,7 +17,7 @@ jobs:
 
   build-beta:
     needs: release
-    name: Build Docker image
+    name: Build Beta Docker image
     uses: ./.github/workflows/build-image.yml
     secrets: inherit
     permissions:
@@ -29,7 +29,7 @@ jobs:
 
   build-prod:
     needs: release
-    name: Build Docker image
+    name: Build Prod Docker image
     uses: ./.github/workflows/build-image.yml
     secrets: inherit
     permissions:

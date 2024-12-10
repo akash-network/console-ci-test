@@ -70,6 +70,6 @@ jobs:
 
       - name: Build Docker image
         env:
-          DEPLOYMENT_ENV: ${{ inputs.deployment_env }}
+          DEPLOYMENT_ENV: ${{ inputs.deployment-env }}
         run: |
           ./packages/docker/script/build.sh -r ${{ env.registry }} -t ${{ env.tag }} -a ${{ env.app }} ${{ env.force_build }}
