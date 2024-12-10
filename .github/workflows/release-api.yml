@@ -24,5 +24,6 @@ jobs:
     name: Build Docker image
     uses: ./.github/workflows/build-image.yml
     secrets: inherit
+    permissions: inherit
     with:
       tag: ${{ needs.release.outputs.version }}
