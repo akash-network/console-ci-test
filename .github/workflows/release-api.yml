@@ -7,10 +7,6 @@ on:
     paths:
       - 'apps/api/package.json'
 
-permissions:
-  contents: write
-  packages: write
-
 jobs:
   release:
     name: Create Release Draft
@@ -24,6 +20,8 @@ jobs:
     name: Build Docker image
     uses: ./.github/workflows/build-image.yml
     secrets: inherit
-    permissions: inherit
+    permissions:
+      contents: write
+      packages: write
     with:
       tag: ${{ needs.release.outputs.version }}
