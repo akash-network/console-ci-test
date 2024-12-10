@@ -1,5 +1,12 @@
 
 
+## [2.37.7](https://github.com/akash-network/console/compare/console-api/v2.37.6...console-api/v2.37.7) (2024-12-10)
+
+
+### Bug Fixes
+
+* dummy ([f374852](https://github.com/akash-network/console/commit/f374852612c1e0976c31c1a4368fd5f2a23d0607))
+
 ## [2.37.6](https://github.com/akash-network/console/compare/console-api/v2.37.5...console-api/v2.37.6) (2024-12-10)
 
 
