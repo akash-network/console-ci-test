@@ -1,5 +1,12 @@
 
 
+## [2.27.4](https://github.com/akash-network/console-ci-test/compare/console-web/v2.27.3...console-web/v2.27.4) (2024-12-10)
+
+
+### Bug Fixes
+
+* dummy ([7b82f3b](https://github.com/akash-network/console-ci-test/commit/7b82f3b6344ba7ce1c170e6e97e63e29db02ec16))
+
 ## [2.27.3](https://github.com/akash-network/console-ci-test/compare/console-web/v2.27.1...console-web/v2.27.3) (2024-12-10)
 
 
