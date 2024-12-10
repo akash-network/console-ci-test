@@ -1,11 +1,11 @@
-name: Release API
+name: Release Deploy Web
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'apps/api/package.json'
+      - 'apps/deploy-web/package.json'
 
 jobs:
   release:
@@ -13,7 +13,7 @@ jobs:
     uses: ./.github/workflows/create-github-release.yml
     secrets: inherit
     with:
-      app: api
+      app: deploy-web
 
   build:
     needs: release

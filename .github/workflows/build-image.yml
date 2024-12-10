@@ -32,24 +32,28 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker image
+      - name: Determine registry and app
+        id: determine
         run: |
           tag=${{ inputs.tag }}
           force_build=""
-          
+
           if [[ "$tag" == console-api/* ]]; then
-            registry=${{ vars.API_REGISTRY }}
-            app="api"
+            echo "registry=${{ vars.API_REGISTRY }}" >> $GITHUB_ENV
+            echo "app=api" >> $GITHUB_ENV
           elif [[ "$tag" == console-web/* ]]; then
-            registry=${{ vars.WEB_REGISTRY }}
-            app="deploy-web"
-            force_build="-f"
+            echo "registry=${{ vars.WEB_REGISTRY }}" >> $GITHUB_ENV
+            echo "app=deploy-web" >> $GITHUB_ENV
+            echo "force_build=-f" >> $GITHUB_ENV
           else
             echo "Error: Unknown tag format"
             exit 1
           fi
-          
-          tag="${tag#*/}"
-          tag="${tag#v}"g
 
-          ./packages/docker/script/build.sh -r $registry -t $tag -a $app $force_build
+          tag="${tag#*/}"
+          tag="${tag#v}"
+          echo "tag=$tag" >> $GITHUB_ENV
+
+      - name: Build Docker image
+        run: |
+          ./packages/docker/script/build.sh -r ${{ env.registry }} -t ${{ env.tag }} -a ${{ env.app }} ${{ env.force_build }}

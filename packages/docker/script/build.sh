@@ -116,9 +116,7 @@ if [[ "${FORCE_BUILD}" == false ]]; then
   docker image tag "${TAGGED_IMAGE}" "${REPO}:${SHA}"
 fi
 
-if [[ "${TAG}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-  docker image tag "${TAGGED_IMAGE}" "${REPO}:latest"
-fi
+docker image tag "${TAGGED_IMAGE}" "${REPO}:latest"
 
 docker push "${TAGGED_IMAGE}"
 docker push "${REPO}:latest"
