@@ -23,10 +23,9 @@ jobs:
     permissions:
       contents: write
       packages: write
-    env:
-      DEPLOYMENT_ENV: staging
     with:
       tag: ${{ needs.release.outputs.version }}-beta
+      deployment-env: staging
 
   build-prod:
     needs: release
@@ -36,7 +35,6 @@ jobs:
     permissions:
       contents: write
       packages: write
-    env:
-      DEPLOYMENT_ENV: production
     with:
       tag: ${{ needs.release.outputs.version }}
+      deployment-env: production
