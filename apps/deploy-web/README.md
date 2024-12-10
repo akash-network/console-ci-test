@@ -12,4 +12,4 @@
 
 The website should be accessible: [http://localhost:3000/](http://localhost:3000/)
 
-fix 1
+fix 2
